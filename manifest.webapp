@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "name": "My NP",
+  "description": "My NP allows you to participate in volunteer opportunities and events at your local non-profit.",
+  "developer": {
+    "name": "Ben Witte",
+    "url": "http://www.witsenj.com"
+  },
+  "launch_path": "/growingplaces/mygp/index.php",
+  "default_locale": "en",
+  "chrome": { "navigation": true },
+  "appcache_path": "/mynp.appcache",
+  "icons": {
+    "16": "/images/icon-16.png",
+    "48": "/images/icon-48.png",
+    "60": "/images/icon-60.png",
+    "128": "/images/icon-128.png"
+  }
+
+}

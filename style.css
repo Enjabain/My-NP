@@ -1,0 +1,122 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    box-sizing:         border-box;
+}
+body {
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    color: #000;
+    margin: 0px;
+    background-color:#ffd75a;
+}
+.textfield {
+    font-size: 11px;
+    color: #333333;
+    background: #F7F7F7;
+    border: 1px solid #CCCCCC;
+    padding-left: 1px;
+}
+h1 {
+    margin: 0px 0px 5px;
+    padding: 0px 0px 3px;
+
+}
+a {
+    color: #000;
+    font-size: 11px;
+}
+a:hover {
+    color: #000;
+}
+div.main {max-width:1250px; position:relative; margin:0 auto; padding: 20px 10px 10px 10px;}
+div.sitename {
+        float:left;
+}
+.siteurl {color:#000; text-decoration:none;}
+table, td , th{
+    font-size:10px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color:#000;
+}
+table {width:100%;border-collapse:collapse;margin:1em 0;}
+th, td {text-align:left;padding:.5em;border:1px solid #fff;}
+th {background:#f6a836; color:#fff;}
+tr {background:#bce774;}
+button { font-size:10px;}
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+.ui-timepicker-div dl{ text-align: left; }
+.ui-timepicker-div dl dt{ height: 25px; }
+.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+
+.attendees {border:0;}
+.attendees td {border:0; padding:0;}
+.attendees th {background:none; border:0; color:#000000; padding:0;}
+.signup {border:0;}
+.signup td {border:0; padding:0;}
+.signup th {background:none; border:0; color:#000000; padding:0;}
+.mylist {
+    background-color:#FFF8DC;
+    border-radius: 10px;
+    padding:5px;
+
+
+}
+.mylist table {
+    background-color:#ffffff;
+    border:0;
+
+
+
+
+
+}
+.content {padding:10px 0px 0px 0px; max-width:615px; position:relative; }
+#volunteeradmin {float: left; padding:10px 10px 0px 0px; width:50%; max-width:615px; min-height:700px; position:relative; }
+#eventsadmin {float: right; padding:10px 0px 0px 10px;max-width:615px; width:50%; min-height:700px; position:relative;}
+.leftmain {float: left; padding:10px 10px 0px 0px; width:100%; max-width:615px; position:relative; }
+.rightmain {float: right; padding:10px 0px 0px 10px; width:100%; max-width:615px; position:relative; }
+#donations {width:210px; float:right;}
+#donationsmain {width:110px; float:right;}
+.signupcell {width:105px;}
+.signupkids {float:right;}
+.signupadults {float:left;}
+.attendeeshover {display:none;}
+.mylist th { background-color:#ffffff; color:#000000; border-bottom:1px solid #000000;}
+.mylist td { background-color:#ffffff; border-bottom:1px solid #000000;}
+@media (max-width: 1249px) {
+    #volunteeradmin {clear:both; width:100%; padding-right:0px;}
+    #eventsadmin {float: left; clear:both; padding-left:0px; width:100%;}
+    .leftmain {clear:both; width:100%; padding-right:0px;}
+    .rightmain {float: left; clear:both; padding-left:0px; width:100%;}
+
+}
+@media (max-width:562px) {
+    td, th {font-size:9px;}
+    table a {font-size:9px;}
+    body {padding:0px;}
+    #backtomain {display:none;}
+    #welcome {display:none;}
+    td.attendeestd {max-width:50px; max-height:50px; position:relative;}
+    tr {max-height:50px;}
+    .attendees {display:none; position:relative; top:0px; left: -150px; border:2px solid #F7F7F7;}
+
+    td.attendeestd:hover .attendees{display:block;}
+    td.attendeestd:hover .attendeeshover {display:none;}
+    .attendeeshover {display:inline;}
+    .potluck {width:50px;}
+    .signupkids {float:left;}
+    .signupcell {width:47px;}
+
+
+
+}
+@media (max-width: 436px) {
+    #donations {float:left;}
+
+}
+@media (max-width:318px) {
+    #donationsmain {float:left;}
+}
