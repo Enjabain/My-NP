@@ -78,6 +78,7 @@ button { font-size:10px;}
 #eventsadmin {float: right; padding:10px 0px 0px 10px;max-width:615px; width:50%; min-height:700px; position:relative;}
 .leftmain {float: left; padding:10px 10px 0px 0px; width:100%; max-width:615px; position:relative; }
 .rightmain {float: right; padding:10px 0px 0px 10px; width:100%; max-width:615px; position:relative; }
+.section {width:100%;}
 #donations {width:210px; float:right;}
 #donationsmain {width:110px; float:right;}
 .signupcell {width:105px;}

@@ -34,7 +34,7 @@ if ($loggedin == "false") {
 if ($loggedin == "true") {
 
 
-    echo'<div style="width:100%;"><div class="leftmain"><form id="jobforfitform" name="jobforfitform" method="post" action="jobforfeit-exec.php">
+    echo'<div class="section"><div class="leftmain"><form id="jobforfitform" name="jobforfitform" method="post" action="jobforfeit-exec.php">
 <h2>My Jobs</h2><table>
 <tr><th>Name</th><th>Description</th><th>Type</th><th>Status</th>';
     $query = $db->prepare('
@@ -129,7 +129,7 @@ To edit your RSVP, decline and sign up again.
     echo '</table></form></div></div>';
 }
 
-echo'<br style="clear:both;" /><div style="width:100%;"><div class="leftmain">
+echo'<br style="clear:both;" /><div class="section"><div class="leftmain">
 <form id="jobsignupform" name="jobsignupform" method="post" action="jobsignup-exec.php">
     <h2>Volunteer Opportunities</h2>
     <table>
@@ -299,7 +299,7 @@ echo '</table><a style="float:right; margin-right:10px;" href="pastevents.php">P
 
 echo'
 <br style="clear:both;"/>
-<div style="width:100%;"><div class="leftmain"><h2>Suggestions</h2>
+<div class="section"><div class="leftmain"><h2>Suggestions</h2>
     <table><tr><th>Suggestion</th><th>Category</th><th>Suggested by</th><th>Votes</th></tr>
            <tr><td></td><td></td><td></td><td></td></tr></table></div>';
 if ($loggedin == "true") {

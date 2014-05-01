@@ -62,7 +62,7 @@ echo '</table></form><a style="float:right; margin-right:10px;" href="completedj
 ?>
 <?php
 echo'
-<div id="rightmain">
+<div class="rightmain">
 <form id="editeventform" name="editeventform" method="post" action="editevent.php">
 	<h2>Upcoming Events</h2>
 	<table style="font-size:12px; color:#000;">
@@ -111,6 +111,7 @@ foreach ($query1 as $row1) {
 echo '</table></form><a style="float:right; margin-right:10px;"  href="pastevents.php">Past Events</a></div>';
 ?>
 </div>
+<br style="clear:both;"/>
 <div class="section">
     <div class="leftmain">
         <h2>Add Job</h2>
