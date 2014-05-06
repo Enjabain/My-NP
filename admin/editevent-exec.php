@@ -24,10 +24,10 @@ $event_status = htmlentities($_POST['event_status']);
 $finalize = htmlentities($_POST['finalize']);
 
 $query5 = $db->prepare('DELETE 
-  FROM event_details p
-  WHERE event_details_id = :event_details_id AND NOT EXISTS  
+  FROM event_details
+  WHERE event_details.event_details_id = :event_details_id AND NOT EXISTS  
       (SELECT * FROM events 
-       WHERE event_details_id = p.event_details_id)');
+       WHERE events.event_details_id = event_details.event_details_id)');
 
 //Input Validations
 if ($event_id == '') {
@@ -56,7 +56,7 @@ if ($event_date == '') {
 if ($errflag) {
     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
     session_write_close();
-    header("location: editevent.php");
+    header("location: editevent.php?event_id=".$event_id."");
     exit();
 }
 

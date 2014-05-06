@@ -27,6 +27,9 @@ $errflag = false;
 
 //Sanitize the POST values
 $job_id = htmlentities($_POST['job_id']);
+if ($job_id == '') {
+    $job_id = $_GET['job_id'];
+}
 //Input Validations
 if ($job_id == '') {
     $errmsg_arr[] = 'Job id missing';
@@ -52,7 +55,7 @@ echo'
 <form id="editjobform" name="editjobform" method="post" action="editjob-exec.php">
 <h2>Admin - Volunteer Opportunities</h2>
 	<table>
-<tr><th>Name</th><th>Description</th><th>Type</th><th>Best Finished By Date</th><th>Time Spent</th><th>In Progress By</th><th>Change Status</th><th>Status</th>
+<tr><th>Name</th><th>Description</th><th>Type</th><th>Best Finished By Date</th><th>Time Spent</th><th>In Progress By</th><th>Finalize</th><th>Status</th>
 ';
 
 
@@ -113,7 +116,7 @@ foreach ($query as $row) {
     echo '
 </select></td>
 <td>
-<select name="statusupdate"><option value="donothing">Do Nothing</option>
+<select name="finalize"><option value="update">Update</option>
 <option value="complete">Complete</option>
 <option value="completionpending">Completion Pending</option>
 <option value="inprogress">In Progress</option>

@@ -25,9 +25,12 @@ $errflag = false;
 
 //Sanitize the POST values
 $event_id = htmlentities($_POST['event_id']);
+if ($event_id == '') {
+    $event_id = $_GET['event_id'];
+}
 //Input Validations
 if ($event_id == '') {
-    $errmsg_arr[] = 'Job id missing';
+    $errmsg_arr[] = 'Event id missing';
     $errflag = true;
 }
 
@@ -94,23 +97,24 @@ foreach ($query as $row) {
     if ($event_ispotluck == 1) {
         echo "selected='selected'";
     }
-        echo '>Yes</option>
+    echo '>Yes</option>
   		<option value="0" ';
     if ($event_ispotluck == 0) {
         echo "selected='selected' ";
     }
-        echo '>No</option>
+    echo '>No</option>
 	  </select>
 </td>
 <td><input type=textarea size="10" name="event_date" id="event_date" value="' . $event_date . '"/></td>
-<td><input type="radio" name="finalize" value="complete" /> Mark For Completion<br />
-<input type="radio" name="finalize" value="reactivate" /> Mark For Reactivation<br />
-<input type="radio" name="finalize" value="delete" /> Mark For Deletion<br />
-<input type="radio" name="finalize" value="cancel" /> Mark For Cancelation (will send email to attendees)';
-    echo '<input type="hidden" name="event_details_id" value="' . $event_reccurence . '" />';
+<td><select name="finalize"><option value="update">Update</option>
+<option value="complete">Complete</option>
+<option value="reactivate">Incomplete</option>
+<option value="delete">Delete</option>
+<option value="cancel">Cancel (will send email to attendees)</option>';
     if ($event_recurrs == '1') {
-        echo'<br /><input type="radio" name="finalize" value="deleterecurring" /> Mark For Deletion of <b>All Recurrences</b>';
+        echo'<option value="deleterecurring">Delete <b>All Recurrences</b></option>';
     }
+    echo '</select><input type="hidden" name="event_details_id" value="' . $event_reccurence . '" />';
 
     echo'</td><td><button type="submit" value="' . $event_id . '" name="event_id">Submit</button></td>';
     echo '</tr>';

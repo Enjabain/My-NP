@@ -13,7 +13,7 @@ echo'
 <form id="editjobform" name="editjobform" method="post" action="editjob.php">
 	<h2>Volunteer Opportunites</h2>
 	<table style="font-size:12px; color:#000;">
-<tr><th>Name</th><th>Description</th><th>Type</th><th>Best Finished By Date</th><th>Status</th>
+<tr><th>Name</th><th>Description</th><th>Type</th><th>Status</th>
 ';
 
 
@@ -34,7 +34,6 @@ foreach ($query as $row) {
     $job_name = $row['job_name'];
     $job_description = $row['job_description'];
     $job_type = $row['job_type'];
-    $job_bestfinishedby = $row['job_bestfinishedby'];
     $job_timeallowance = $row['job_timeallowance'];
     $job_status = $row['job_status'];
     $job_inprogressby = $row['job_inprogressby'];
@@ -49,11 +48,9 @@ foreach ($query as $row) {
     } else if ($job_status == '2') {
         $job_status_message = 'Completion pending by <a href="member.php?member_id=' . $member_id . '">' . $member_username . '</a><br />';
     }
-    $dateTime = new DateTime($job_bestfinishedby);
-    $job_bestfinishedby = date_format($dateTime, "n-d-Y");
 
     echo '<tr><td style="font-weight:bold;">' . $job_name . '</td>';
-    echo '<td>' . $job_description . '</td><td>' . $job_type . '</td><td>' . $job_bestfinishedby . '</td><td>
+    echo '<td>' . $job_description . '</td><td>' . $job_type . '</td><td>
 ' . $job_status_message . '
 <button type="submit" value="' . $job_id . '" name="job_id">Edit</button></td>';
     echo '</tr>';
@@ -115,7 +112,7 @@ echo '</table></form><a style="float:right; margin-right:10px;"  href="pastevent
 <div class="section">
     <div class="leftmain">
         <h2>Add Job</h2>
-        <form id="volunteerform" name="volunteerform" method="post" action="volunteer-exec.php">
+        <form id="volunteerform" name="volunteerform" method="post" action="addjob-exec.php">
             <table border="0" align="center" cellpadding="2" cellspacing="0">
                 <tr>
                     <th>Job Name</th>
@@ -130,19 +127,6 @@ echo '</table></form><a style="float:right; margin-right:10px;"  href="pastevent
                     <td><input name="job_type" type="text" class="textfield" id="job_type" /></td>
                 </tr>
                 <tr>
-                    <th>Job Best Finished by Date</th>
-                    <td>
-                        <script>
-                            $(function() {
-                                $.datepicker.setDefaults($.datepicker.regional['']);
-                                $('#job_bestfinishedby').datepicker({
-                                    dateFormat: 'yy-mm-dd'
-                                });
-                            });
-                        </script>
-                        <input name="job_bestfinishedby" type="text" class="textfield" id="job_bestfinishedby" /></td>
-                </tr>
-                <tr>
                     <th>&nbsp;</th>
                     <td><input type="submit" name="Submit" value="Add Job" /></td>
                 </tr>
@@ -151,7 +135,7 @@ echo '</table></form><a style="float:right; margin-right:10px;"  href="pastevent
     </div>
     <div class="rightmain">
         <h2>Add Event</h2>
-        <form id="eventform" name="eventform" method="post" action="event-exec.php">
+        <form id="eventform" name="eventform" method="post" action="addevent-exec.php">
             <table>
                 <tr>
                     <th>Event Name</th>

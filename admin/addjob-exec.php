@@ -18,7 +18,6 @@ include("../connect.php");
 	$job_name = htmlentities($_POST['job_name']);
 	$job_type = htmlentities($_POST['job_type']);
 	$job_description = htmlentities($_POST['job_description']);
-	$job_bestfinishedby = htmlentities($_POST['job_bestfinishedby']);
 	$job_status = '0';
 	//Input Validations
 	if($job_name == '') {
@@ -33,11 +32,7 @@ include("../connect.php");
 		$errmsg_arr[] = 'Job description missing';
 		$errflag = true;
 	}
-	if($job_bestfinishedby == '') {
-		$errmsg_arr[] = 'Job complete by date missing';
-		$errflag = true;
-	}
-	
+
 	
 	//If there are input validations, redirect back to the registration form
 	if($errflag) {
@@ -48,8 +43,8 @@ include("../connect.php");
 	}
 
 	//Create INSERT query
-        $query = $db->prepare('INSERT INTO volunteer_opportunities(job_name, job_type, job_description, job_bestfinishedby, job_status, job_creator) VALUES(:job_name,:job_type,:job_description,:job_bestfinishedby, :job_status, :job_creator)');
-	$result = $query->execute(array('job_name' => $job_name, 'job_type' => $job_type, 'job_description' => $job_description, 'job_bestfinishedby' => $job_bestfinishedby, 'job_status' => $job_status, 'job_creator' => $job_creator));
+        $query = $db->prepare('INSERT INTO volunteer_opportunities(job_name, job_type, job_description, job_status, job_creator) VALUES(:job_name, :job_type, :job_description, :job_status, :job_creator)');
+	$result = $query->execute(array('job_name' => $job_name, 'job_type' => $job_type, 'job_description' => $job_description, 'job_status' => $job_status, 'job_creator' => $job_creator));
 	
 	//Check whether the query was successful or not
 	if($result) {
