@@ -5,17 +5,6 @@ include("../functions.php");
 authAdmin();
 include("../connect.php");
 include("template_header.php");
-?>
-<script>
-    $(function() {
-        $.datepicker.setDefaults($.datepicker.regional['']);
-        $('#job_bestfinishedby').datepicker({
-            dateFormat: 'yy-mm-dd'
-        });
-    });
-</script>
-
-<?php
 
 $member_id = $_SESSION['SESS_MEMBER_ID'];
 
@@ -55,7 +44,7 @@ echo'
 <form id="editjobform" name="editjobform" method="post" action="editjob-exec.php">
 <h2>Admin - Volunteer Opportunities</h2>
 	<table>
-<tr><th>Name</th><th>Description</th><th>Type</th><th>Best Finished By Date</th><th>Time Spent</th><th>In Progress By</th><th>Finalize</th><th>Status</th>
+<tr><th>Name</th><th>Description</th><th>Type</th><th>Time Spent</th><th>In Progress By</th><th>Finalize</th><th>Status</th>
 ';
 
 
@@ -72,7 +61,6 @@ foreach ($query as $row) {
     $job_name = $row['job_name'];
     $job_description = $row['job_description'];
     $job_type = $row['job_type'];
-    $job_bestfinishedby = $row['job_bestfinishedby'];
     $job_time = $row['job_time'];
     $job_status = $row['job_status'];
     $job_inprogressby = $row['job_inprogressby'];
@@ -91,7 +79,7 @@ foreach ($query as $row) {
     $minutes = floor(($job_time - ($hours * 3600)) / 60);
 
     echo '<tr><td><input type=textarea size="10" name="job_name" id="job_name" value="' . $job_name . '"/></td>';
-    echo '<td><textarea cols=40 rows=6 name="job_description" id="job_description"/>' . $job_description . '</textarea></td><td><input type=textarea size="10" name="job_type" id="job_type" value="' . $job_type . '"/></td><td><input type=textarea size="10" name="job_bestfinishedby" id="job_bestfinishedby" value="' . $job_bestfinishedby . '"/></td><td>';
+    echo '<td><textarea cols=40 rows=6 name="job_description" id="job_description"/>' . $job_description . '</textarea></td><td><input type=textarea size="10" name="job_type" id="job_type" value="' . $job_type . '"/></td><td>';
     if ($job_status == '2') {
         echo '<span style="color:red; font-weight:bold;">Time requires approval</span><br />';
     }

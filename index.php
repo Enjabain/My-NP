@@ -17,11 +17,11 @@ include("template_header.php");
 
             if ($("input[name=namedanonymous]:checked").val() === 'anonymous') {
                 $('input:radio[name=publicprivate][value="private"]').prop('checked', true);
-                $('input[name=publicprivate][value="public"]').prop('disabled',true);
+                $('input[name=publicprivate][value="public"]').prop('disabled', true);
             }
             if ($("input[name=namedanonymous]:checked").val() === 'named') {
                 $('input:radio[name=publicprivate][value="public"]').prop('checked', true);
-                $('input[name=publicprivate][value="public"]').prop('disabled',false);
+                $('input[name=publicprivate][value="public"]').prop('disabled', false);
             }
         });
     });
@@ -62,7 +62,7 @@ if ($loggedin == "true") {
             if ($job_status == 1) {
                 echo '<tr><td style="font-weight:bold;">' . $job_name . '</td>';
                 echo '<td>' . $job_description . '</td><td>' . $job_type . '</td><td>In progress<br />
-<button type="submit" value="' . $job_id . '" name="job_forfeit_id">Forfeit</button><br /><br />Hours:<input type="text" style="width:20px;" name="hours" value="" /><br />Minutes:<input type="text"  style="width:20px;" name="minutes" value="" /><button type="submit" value="' . $job_id . '" name="job_complete_id">Complete</button></td>';
+<button type="submit" value="' . $job_id . '" name="job_forfeit_id">Forfeit</button><br /><br />Hours:<input type="text" style="width:20px;" name="hours" value="" /><br />Minutes:<input type="text"  style="width:20px;" name="minutes" value="" /><br /><button type="submit" value="' . $job_id . '" name="job_complete_id">Complete</button></td>';
                 echo '</tr>';
             } elseif ($job_status == 2) {
                 echo '<tr><td style="font-weight:bold;">' . $job_name . '</td>';
@@ -202,6 +202,7 @@ $query4 = $db->prepare('
         ');
 $query4->execute();
 if ($query4->rowCount() != 0) {
+    $rowCount = 0;
     foreach ($query4 as $row) {
         $event_name = $row['event_name'];
         $event_description = $row['event_description'];
@@ -233,8 +234,8 @@ if ($query4->rowCount() != 0) {
                 $signed_up = 'false';
             }
         }
-
         if ($signed_up == 'false' && authEvent($event_auth_type, $event_type)) {
+            $rowCount++;
             echo '<tr><td style="font-weight:bold;">' . $event_name . '</td>';
             echo '<td>' . $event_description . '</td><td>' . $event_type . '</td><td>' . $event_date . '';
             if ($event_recurrs == 1) {
@@ -292,24 +293,50 @@ if ($query4->rowCount() != 0) {
             echo'</tr>';
         }
     }
+    if ($rowCount == 0) {
+        echo '<tr><td colspan="6">There are no events currently listed publicly, login to see more.</tr>';
+    }
 } else {
     echo '<tr><td colspan="6">There are no events listed currently.</tr>';
 }
-echo '</table><a style="float:right; margin-right:10px;" href="pastevents.php">Past Events</a><br/></div>';
+echo '</table><a style="float:right; margin-right:10px;" href="pastevents.php">Past Events</a><br/></div></div>';
 
 echo'
 <br style="clear:both;"/>
 <div class="section"><div class="leftmain"><h2>Suggestions</h2>
-    <table><tr><th>Suggestion</th><th>Category</th><th>Suggested by</th><th>Votes</th></tr>
-           <tr><td></td><td></td><td></td><td></td></tr></table></div>';
+    <table><tr><th>Suggestion</th><th>Category</th><th>Suggested by</th></tr>';
+$query5 = $db->prepare('
+        SELECT *
+        FROM mynp_suggestions LEFT JOIN members ON suggested_by = member_id
+        WHERE suggestion_status = 1');
+$query5->execute();
+if ($query5->rowCount() != 0) {
+    foreach ($query5 as $row) {
+        $suggestion = $row['suggestion'];
+        $suggested_by = $row['suggested_by'];
+        $member_id = $row['member_id'];
+        $username = $row['username'];
+        $category = $row['category'];
+        $votes = $row['votes'];
+        $suggested_by_display = '<a href="member.php?member_id=' . $member_id . '">' . $username . '</a>';
+        if ($member_id == '') {
+            $suggested_by_display = 'Anonymous';
+        }
+
+        echo'<tr><td>' . $suggestion . '</td><td>' . $category . '</td><td>' . $suggested_by_display . '</td></tr>';
+    }
+} else {
+    echo '<tr><td colspan="4">No public suggestions have been made yet.</td></tr>';
+}
+echo '</table></div>';
 if ($loggedin == "true") {
     echo'<div class="rightmain">
       <h2>Make a Suggestion</h2>
             <form method="post" action="suggestion-exec.php" >
-           <table><tr><th>Suggestion</th><td><textarea></textarea></td></tr>
-           <tr><th>Category</th><td><select><option>General</option><option>School</option><option>Garden</option><option>Quaker</option><option>Website</option><option>Other</option></select></td></tr>
+           <table><tr><th>Suggestion</th><td><textarea name="suggestion"></textarea></td></tr>
+           <tr><th>Category</th><td><select name="category"><option value="General">General</option><option value="School">School</option><option value="Garden">Garden</option><option value="Quaker">Quaker</option><option value="Website">Website</option><option value="Other">Other</option></select></td></tr>
            <tr><th>Anonymity</th><td><label><input value="named" checked name="namedanonymous" type="radio" />Named (' . $_SESSION['SESS_USERNAME'] . ')</label><br /><label><input value="anonymous" name="namedanonymous" type="radio" />Anonymous (Must be private)</label></td></tr>
-           <tr><th>Public/Private</th><td><label><input value="public" checked name="publicprivate" type="radio" />Public (Requires Moderation)</label><br /><label><input value="private" name="publicprivate" type="radio" />Private</label></td></tr>
+           <tr><th>Public/Private</th><td><label><input value="public" checked name="publicprivate" type="radio" />Public (Requires Approval)</label><br /><label><input value="private" name="publicprivate" type="radio" />Private</label></td></tr>
            <tr><th></th><td><input type="submit" value="Submit" /></td></tr>
     </table></form></div></div>';
 }

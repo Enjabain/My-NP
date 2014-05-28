@@ -73,7 +73,7 @@ if ($member_id == $_SESSION['SESS_MEMBER_ID']) {
 }
 echo'<h2>' . $member_username . '&apos;s Jobs</h2>
 	<table>
-<tr><th>Name</th><th>Description</th><th>Type</th><th>Best Finished By Date</th><th>Time Spent</th><th>Status</th></tr>';
+<tr><th>Name</th><th>Description</th><th>Type</th><th>Time Spent</th><th>Status</th></tr>';
 
 
 
@@ -91,7 +91,6 @@ if ($query3->rowCount() != 0) {
         $job_name = $row['job_name'];
         $job_description = $row['job_description'];
         $job_type = $row['job_type'];
-        $job_bestfinishedby = $row['job_bestfinishedby'];
         $job_time = $row['job_time'];
         $job_status = $row['job_status'];
         $job_inprogressby = $row['job_inprogressby'];
@@ -119,7 +118,7 @@ if ($query3->rowCount() != 0) {
         }
 
         echo '<tr><td style="font-weight:bold;">' . $job_name . '</td>';
-        echo '<td>' . $job_description . '</td><td>' . $job_type . '</td><td>' . $job_bestfinishedby . '</td><td>' . $job_status_message . '</td>';
+        echo '<td>' . $job_description . '</td><td>' . $job_type . '</td><td>' . $job_status_message . '</td>';
         echo '</tr>';
     }
     $total_hours = floor($total_seconds / 3600);
